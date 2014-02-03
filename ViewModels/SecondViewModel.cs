@@ -1,0 +1,29 @@
+using System;
+using Cirrious.MvvmCross.ViewModels;
+using System.Diagnostics;
+using Cirrious.CrossCore;
+using System.Windows.Input;
+
+namespace MvvmCrossViewModelInitialization
+{
+	public class SecondViewModel : MvxViewModel
+	{
+
+		protected void Init(string parameter)
+		{
+			// this call does not happen!
+			Mvx.Trace (Cirrious.CrossCore.Platform.MvxTraceLevel.Diagnostic, "Did call into the Init");
+		}
+
+		private string _second;
+
+		public string Second {
+			get { return _second; }
+			set {
+				_second = value;
+				RaisePropertyChanged (() => Second);
+			}
+		}
+	}
+}
+
