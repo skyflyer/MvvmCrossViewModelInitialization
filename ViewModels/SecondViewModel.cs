@@ -9,6 +9,11 @@ namespace MvvmCrossViewModelInitialization
 	public class SecondViewModel : MvxViewModel
 	{
 
+		protected override void InitFromBundle (IMvxBundle parameters)
+		{
+			base.InitFromBundle (parameters);
+		}
+
 		protected void Init(string parameter)
 		{
 			// this call does not happen!

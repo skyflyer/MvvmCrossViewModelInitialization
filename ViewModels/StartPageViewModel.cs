@@ -8,37 +8,38 @@ using System.Collections.Generic;
 
 namespace MvvmCrossViewModelInitialization
 {
-	public class StartPageViewModel : BaseViewModel
+	public class StartPageViewModel : MvxViewModel
 	{
 		public LoginViewModel Login { get; set; }
 
-		protected override void InitFromBundle (IMvxBundle parameters)
-		{
-			Login = LoadViewModel<LoginViewModel> (parameters);
-		}
-
-		protected void Init(string SerializedParameterObject)
-		{
-			// this call does not happen!
-			Mvx.Trace (Cirrious.CrossCore.Platform.MvxTraceLevel.Diagnostic, "Did call into the Init");
-		}
+//		protected override void InitFromBundle (IMvxBundle parameters)
+//		{
+//			Login = LoadViewModel<LoginViewModel> (parameters);
+//		}
+//
+//		protected void Init(string SerializedParameterObject)
+//		{
+//			// this call does not happen!
+//			Mvx.Trace (Cirrious.CrossCore.Platform.MvxTraceLevel.Diagnostic, "Did call into the Init");
+//		}
 
 		public ICommand DoIt { 
 			get {
-				ComplexObjectType theObject = new ComplexObjectType () {
-					Foo = "for second",
-					Child = new NestedObjectType () {
-						Foobar = "bam baz"
-					}
-				};
+				return new MvxCommand(() => {
+					ComplexObjectType theObject = new ComplexObjectType () {
+						Foo = "for second",
+						Child = new NestedObjectType () {
+							Foobar = "bam baz"
+						}
+					};
 
-				string serialized = JsonConvert.SerializeObject (theObject, Formatting.None, new JsonSerializerSettings () { NullValueHandling = NullValueHandling.Ignore });
+					string serialized = JsonConvert.SerializeObject (theObject, Formatting.None, new JsonSerializerSettings () { NullValueHandling = NullValueHandling.Ignore });
 
-				MvxBundle bundle = new MvxBundle (new Dictionary<string, string> () {
-					{ "parameter", serialized }
+					MvxBundle bundle = new MvxBundle (new Dictionary<string, string> () {
+						{ "parameter", serialized }
+					});
+					ShowViewModel<SecondViewModel>(bundle);
 				});
-
-				return new MvxCommand(() => ShowViewModel<SecondViewModel>(bundle));
 			} 
 		}
 	}
