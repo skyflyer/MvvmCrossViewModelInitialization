@@ -19,19 +19,19 @@ namespace MvvmCrossViewModelInitialization
 			base.InitFromBundle (parameters);
 		}
 
-		protected void Init(string parameter)
+		public void Init(string parameter)
 		{
 			// this call does not happen!
 			Mvx.Trace (Cirrious.CrossCore.Platform.MvxTraceLevel.Diagnostic, "Did call into the Init");
 		}
 
-		protected void Init(DetailParameters parameters)
+		public void Init(DetailParameters parameters)
 		{
 			// this call does not happen!
 			Mvx.Trace (Cirrious.CrossCore.Platform.MvxTraceLevel.Diagnostic, "Did call into the Init");
 		}
 
-		protected void Init(int Index)
+		public void Init(int Index)
 		{
 			// this call does not happen!
 			Mvx.Trace (Cirrious.CrossCore.Platform.MvxTraceLevel.Diagnostic, "Did call into the Init");
